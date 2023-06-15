@@ -38,8 +38,11 @@ router.get('/showPasswords', async (req, res) => {
 });
 
 router.post("/decryptPassword", (req, res) => {
-  console.log(req.body)
   res.send(decrypt(req.body));
+});
+
+router.post("/encryptPassword", (req, res) => {
+  res.send(encrypt(req.body));
 });
 
 router.delete("/deletePassword/:id", async (req, res) => {
@@ -53,5 +56,33 @@ router.delete("/deletePassword/:id", async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
+router.put("/updatePassword/:id", async (req, res) => {
+  try {
+    const { newPassword, userId } = req.body;
+    const passwordId = req.params.id;
+
+    const encryptedPassword = encrypt(newPassword);
+
+    const updatedPassword = await PasswordsModel.findOneAndUpdate(
+      { _id: passwordId, user: userId },
+      {
+        password: encryptedPassword.password,
+        iv: encryptedPassword.iv
+      },
+      { new: true }
+    );
+
+    if (!updatedPassword) {
+      return res.status(404).json({ message: "Password not found" });
+    }
+
+    res.json({ message: "Password updated successfully", password: updatedPassword });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server Error");
+  }
+});
+
 
 export default router;
