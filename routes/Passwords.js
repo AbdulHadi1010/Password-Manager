@@ -65,8 +65,7 @@ router.put("/updatePassword/:id", async (req, res) => {
     const encryptedPassword = encrypt(newPassword);
 
     const updatedPassword = await PasswordsModel.findOneAndUpdate(
-      { _id: passwordId, user: userId },
-      {
+      { _id: passwordId, user: userId }, {
         password: encryptedPassword.password,
         iv: encryptedPassword.iv
       },
