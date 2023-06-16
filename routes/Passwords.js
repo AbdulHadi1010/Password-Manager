@@ -60,7 +60,10 @@ router.delete("/deletePassword/:id", async (req, res) => {
 router.put("/updatePassword/:id", async (req, res) => {
   try {
     const { newPassword, userId } = req.body;
+    console.log(newPassword)
+    console.log(userId)
     const passwordId = req.params.id;
+    console.log(passwordId)
 
     const encryptedPassword = encrypt(newPassword);
 
