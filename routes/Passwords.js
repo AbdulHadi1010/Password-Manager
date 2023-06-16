@@ -42,7 +42,8 @@ router.post("/decryptPassword", (req, res) => {
 });
 
 router.post("/encryptPassword", (req, res) => {
-  res.send(encrypt(req.body));
+  const {password} = req.body; 
+  res.send(encrypt(password));
 });
 
 router.delete("/deletePassword/:id", async (req, res) => {
@@ -60,10 +61,7 @@ router.delete("/deletePassword/:id", async (req, res) => {
 router.put("/updatePassword/:id", async (req, res) => {
   try {
     const { newPassword, userId } = req.body;
-    console.log(newPassword)
-    console.log(userId)
     const passwordId = req.params.id;
-    console.log(passwordId)
 
     const encryptedPassword = encrypt(newPassword);
 
