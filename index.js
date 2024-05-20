@@ -5,7 +5,6 @@ import { userRouter } from "./routes/User.js";
 import passwordsRouter from "./routes/Passwords.js";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
-const router = express.Router();
 
 dotenv.config();
 
