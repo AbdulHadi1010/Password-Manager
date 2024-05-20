@@ -5,6 +5,7 @@ import { userRouter } from "./routes/User.js";
 import passwordsRouter from "./routes/Passwords.js";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
+const router = express.Router();
 
 dotenv.config();
 
@@ -12,6 +13,9 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
+router.post("/", async (req, res) => {
+  res.json({ message: "Hello world" });
+});
 app.use("/User", userRouter);
 app.use("/Passwords", passwordsRouter);
 
