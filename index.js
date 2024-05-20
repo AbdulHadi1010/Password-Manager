@@ -12,9 +12,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
-app.use("/", async (req, res) => {
-  res.json({ message: "Hello world" });
-});
 app.use("/user", userRouter);
 app.use("/passwords", passwordsRouter);
 
@@ -32,6 +29,6 @@ mongoose.connection.on("connected", () => {
   console.log("Connected to MongoDB");
 });
 
-app.listen(process.env.PORT || 3001, () => {
+app.listen(3001, () => {
   console.log("server is running");
 });
