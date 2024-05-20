@@ -15,8 +15,8 @@ app.use(cookieParser());
 app.use("/", async (req, res) => {
   res.json({ message: "Hello world" });
 });
-app.use("/User", userRouter);
-app.use("/Passwords", passwordsRouter);
+app.use("/user", userRouter);
+app.use("/passwords", passwordsRouter);
 
 // Connect to MongoDB
 mongoose.connect(
