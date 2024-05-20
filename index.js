@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
-router.post("/", async (req, res) => {
+app.use("/", async (req, res) => {
   res.json({ message: "Hello world" });
 });
 app.use("/User", userRouter);
