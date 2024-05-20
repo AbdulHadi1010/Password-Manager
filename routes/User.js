@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 const router = express.Router();
 import { UserModel } from "../models/User.js";
 
-router.post("/signup", async (req, res) => {
+router.post("/", async (req, res) => {
   res.json({ message: "Hello world" });
 });
 router.post("/signup", async (req, res) => {
