@@ -5,33 +5,36 @@ import { userRouter } from "./routes/User.js";
 import passwordsRouter from "./routes/Passwords.js";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
-
 dotenv.config();
 
 const app = express();
+const PORT = process.env.PORT || 3001;
+const DATABASE = process.env.DATABASE;
+
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
-app.use("/", async (req, res) => {
-  res.json({ message: "Hello world" });
+
+// Handle POST request for the root path
+app.post("/", async (req, res) => {
+  res.json({ message: "Hello world from first backend" });
 });
+
 app.use("/User", userRouter);
 app.use("/Passwords", passwordsRouter);
 
 // Connect to MongoDB
-mongoose.connect(
-  process.env.DATABASE,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+mongoose.connect(DATABASE, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 // Check if the connection was successful
 mongoose.connection.on("connected", () => {
   console.log("Connected to MongoDB");
 });
 
-app.listen(process.env.PORT || 3001, () => {
-  console.log("server is running");
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
