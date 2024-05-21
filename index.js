@@ -16,7 +16,7 @@ app.use(cors());
 app.use(cookieParser());
 
 // Handle POST request for the root path
-app.get("/health", async (req, res) => {
+app.get("/", async (req, res) => {
   res.json({ message: "Hello world from first backend" });
 });
 
