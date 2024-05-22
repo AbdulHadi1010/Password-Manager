@@ -17,9 +17,7 @@ app.use(cookieParser());
 
 // Handle POST request for the root path
 app.get("/", async (req, res) => {
-  res
-    .status(200)
-    .json({ message: `Hello world from first backend from ${PORT}` });
+  res.json({ message: `Hello world from first backend from ${PORT}` });
 });
 
 app.use("/User", userRouter);
