@@ -8,7 +8,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 const DATABASE = process.env.DATABASE;
 
 app.use(express.json());
@@ -16,8 +16,10 @@ app.use(cors());
 app.use(cookieParser());
 
 // Handle POST request for the root path
-app.get("/health", async (req, res) => {
-  res.json({ message: "Hello world from first backend" });
+app.get("/", async (req, res) => {
+  res
+    .status(200)
+    .json({ message: `Hello world from first backend from ${PORT}` });
 });
 
 app.use("/User", userRouter);
